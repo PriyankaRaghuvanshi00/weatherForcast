@@ -34,6 +34,12 @@ app.get("/", (req, res) => {
     .on("data", (chunk) => {
       const data = JSON.parse(chunk);
       const object = [data];
+     if(object[0].cod!=200)
+     {
+     res.send(`<h1 style=" margin-top: 20rem;
+     text-align: center;color: gray;">Sorry!! Not  Found :(</h1>
+      `);
+     }
       const temp = object.map((val) => replacevalue(homeFile, val)).join("");
       res.write(temp);
     })
