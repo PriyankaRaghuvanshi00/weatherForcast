@@ -12,7 +12,6 @@ function replacevalue(tempVal, orgVal) {
   let t = tempVal.replace("{%todaytemp%}", orgVal.main.temp);
   t = t.replace("{%min_temp%}", orgVal.main.temp_min);
   t = t.replace("{%location%}", orgVal.name);
-  t = t.replace("{%country%}", orgVal.sys.country);
   t = t.replace("{%max_temp%}", orgVal.main.temp_max);
   return t;
 }
