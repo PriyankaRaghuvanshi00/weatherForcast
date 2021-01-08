@@ -4,7 +4,6 @@ const path = require("path");
 var requests = require("requests");
 const express = require("express");
 const app = express();
-const port=process.env.PORT||3000
 const bodyParser = require("body-parser");
 const { json } = require("express");
 const port=process.env.PORT||3000
@@ -13,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get("", (req, res) => {
+app.get("/", (req, res) => {
   var text = req.query.city;
   console.log(text);
   if (text == "") text = "Indore";
