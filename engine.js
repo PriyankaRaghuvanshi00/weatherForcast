@@ -8,9 +8,18 @@ const bodyParser = require("body-parser");
 const { json } = require("express");
 const port=process.env.PORT||3000
 
+function replacevalue(tempVal, orgVal) {
+  let t = tempVal.replace("{%todaytemp%}", orgVal.main.temp);
+  t = t.replace("{%min_temp%}", orgVal.main.temp_min);
+  t = t.replace("{%location%}", orgVal.name);
+  t = t.replace("{%max_temp%}", orgVal.main.temp_max);
+  return t;
+}
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const homeFile = fs.readFileSync("index.html", "utf-8");
 
 app.get("/", (req, res) => {
   var text = req.query.city;
@@ -34,14 +43,7 @@ app.get("/", (req, res) => {
     });
 });
 
-const homeFile = fs.readFileSync("index.html", "utf-8");
-function replacevalue(tempVal, orgVal) {
-  let t = tempVal.replace("{%todaytemp%}", orgVal.main.temp);
-  t = t.replace("{%min_temp%}", orgVal.main.temp_min);
-  t = t.replace("{%location%}", orgVal.name);
-  t = t.replace("{%max_temp%}", orgVal.main.temp_max);
-  return t;
-}
+
 
 app.listen(port,()=>{
   console.log("listening to "+port);
