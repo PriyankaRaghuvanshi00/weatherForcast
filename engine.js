@@ -6,6 +6,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const { json } = require("express");
+const port=process.env.PORT||3000
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,4 +43,6 @@ function replacevalue(tempVal, orgVal) {
   return t;
 }
 
-app.listen(3000);
+app.listen(port,()=>{
+  console.log("listening to "+port);
+});
