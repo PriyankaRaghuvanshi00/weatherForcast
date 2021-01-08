@@ -4,6 +4,7 @@ const path = require("path");
 var requests = require("requests");
 const express = require("express");
 const app = express();
+const port=process.env.PORT||3000
 const bodyParser = require("body-parser");
 const { json } = require("express");
 
@@ -42,4 +43,6 @@ function replacevalue(tempVal, orgVal) {
   return t;
 }
 
-app.listen(3000);
+app.listen(port,()=>{
+  console.log("listening to "+port);
+});
