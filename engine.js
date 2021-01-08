@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get("/", (req, res) => {
+app.get("", (req, res) => {
   var text = req.query.city;
   console.log(text);
   if (text == "") text = "Indore";
