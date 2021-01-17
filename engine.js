@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
     if(object[0].cod==='404')
     { 
       res.send(`<h1 style='color:red;text-align:center;'>ERROR!</h1>
-      <a style='text-decoration:none;color:blue;text-align:center' href='/'>Click Here</a>`)
+      <a style='text-decoration:none;color:blue;text-align:center;' href='/'>Click Here</a>`)
       return;
     }
       const temp = object.map((val) => replacevalue(homeFile, val)).join("");
