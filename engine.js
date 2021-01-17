@@ -19,7 +19,7 @@ function replacevalue(tempVal, orgVal) {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const homeFile = fs.readFileSync("index.html", "utf-8");
+const homeFile = fs.readFileSync("./index.html", "utf-8");
 app.get("/", (req, res) => {
   var text = req.query.city;
   console.log(text);

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -129,6 +128,20 @@
     const date = document.getElementById("time");
     const btn = document.querySelector(".check")
     const city = document.querySelector(".search")
+    const place = document.querySelector(".place")
+    temp.addEventListener("mouseover",()=>{
+        temp.style.color='orange'
+    })
+    temp.addEventListener("mouseleave",()=>{
+        temp.style.color='gray'
+    })
+    place.addEventListener("mouseover",()=>{
+        place.style.transform='translate(0,-30px)'
+    })
+    place.addEventListener("mouseleave",()=>{
+        place.style.transform='translate(0,0)'
+    })
+
     btn.addEventListener("mouseover",()=>{
      city.style.display="inline"
     })
@@ -174,7 +187,14 @@
       todayDate = `${date} ${mon} ${year}`;
       return todayDate;
     };
-
+    wIcon.addEventListener("mouseenter",()=>{
+        wIcon.style.transform='rotate(-20deg)';
+        wIcon.style.color='rgb(4, 161, 209)'
+    })
+    wIcon.addEventListener("mouseleave",()=>{
+        wIcon.style.transform='rotate(0deg)';
+       weatherIcon(temp.textContent)
+    })
     // weather icon
     const weatherIcon = (t) => {
       if (t >= 23) {
@@ -200,18 +220,3 @@
     date.textContent = getTime();
   </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
