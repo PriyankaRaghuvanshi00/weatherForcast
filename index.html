@@ -1,196 +1,217 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Weather App</title>
-  <!-- <link rel="stylesheet" href="responsive.css"> -->
-  
-  
-  <!-- file from internet -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&family=Oswald:wght@200&family=Redressed&display=swap"
-    rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@500;900&family=Oswald:wght@200&family=Redressed&display=swap"
-    rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
-  <!-- file from internet -->
-</head>
-<style>
-* {
-  padding: 0;
-  margin: 0;
-}
-body {
-  background-color: rgba(7, 7, 7, 0.959);
-}
-.weather-background {
-  box-shadow: 90px 8px 10px;
-  z-index: 1;
-  margin-top: 10%;
-  margin-left: 35%;
-  padding: 2% 2%;
-  width: 25%;
-  height: 50%;
-  border-top-left-radius: 100px;
-  border-top-right-radius: 100px;
-  background-color: rgba(199, 196, 196, 0.925);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
-.temperature {
-  font-size: 30px;
-  display: flex;
-  justify-content: space-between;
-}
-.temp {
-  font-family: "Big Shoulders Stencil Text", cursive;
-  margin-right: 5%;
-}
-#temp-icon {
-  margin-left: 15%;
-  margin-top: 10%;
-}
-.place {
-  color: rgba(10, 83, 133, 0.822);
-  font-family: "Redressed", cursive;
-  margin-top: 15%;
-  font-size: 50px;
-  display: flex;
-  justify-content: center;
-}
-.time {
-  color: rgb(19, 119, 36);
-  display: flex;
-  justify-content: center;
-  margin-top: 10%;
-  font-size: 25px;
-  font-family: "Balsamiq Sans", cursive;
-}
-.min-max-temp {
-  font-family: "Balsamiq Sans", cursive;
-  margin-top: 10%;
-  display: flex;
-  font-size: 28px;
-  justify-content: space-around;
-  color: brown;
-}
-.search-bar{
-  text-align: center;
-  margin: 10px 10px;
-}
-.search{
-  padding: 6px 20px;
-border-bottom: 2px solid green;
-}
-.check{
-  color: black;
-  background-color: darkgoldenrod;
-  padding: 10px 10px;
-  margin:2px 2px;
-}
-
-
-</style>
-<body>
-  <form class="search-bar" method="GET" >
-    <input class="search" type="text" name="city" placeholder="Search City Here **">
-    <button class="check">Check Weather</button>
-  </form>
-  <div class="weather-background">
-    <div class="temperature">
-      <i id="temp-icon" class="fas fa-sun" style="color: darkgoldenrod; font-size: 100px"></i>
-      <h1 class="temp" id="temp">{%todaytemp%}</h1>
-    </div>
-    <div class="place">
-      <i class="fas fa-map-marker" style="margin-right: 20px;color: rgb(6, 122, 216);"></i>{%location%}
-    </div>
-    <div class="time">
-      <p id="time">date</p>
-    </div>
-    <div  class="min-max-temp">
-      <span id="min">{%min_temp%}</span>
-      <span id="max">{%max_temp%}</span>
-    </div>
-  </div>
-</body>
-<script>
-
-const temp = document.getElementById("temp");
-const mintemp = document.getElementById("min")
-const maxtemp = document.getElementById("max")
-const date = document.getElementById("time");
-  const wIcon=document.getElementById('temp-icon');
-  temp.textContent=(temp.textContent- 273.15).toFixed(1);
-  mintemp.textContent=(mintemp.textContent- 273.15).toFixed(1);
-  maxtemp.textContent=(maxtemp.textContent- 273.15).toFixed(1);
-  var Icon;
-  const month = [
-    "Jan",
-    "Feb",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const day = [
-    "Monday",
-    "Tueday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  const getTime = () => {
-    const dt = new Date();
-    const d = day[dt.getDay()];
-    const mon = month[dt.getMonth()];
-    const date=dt.getDate();
-    const year=dt.getFullYear();
-    todayDate=`${date} ${mon} ${year}`;
-    return todayDate;
-  };
-  const weatherIcon=(t)=>{
-    if(t>=23)
-      { Icon="fas fa-cloud-sun";
-    temp.style.color='rgba(243, 243, 72, 0.9)';
-    wIcon.style.color='rgba(243, 243, 72, 0.9)';
-document.body.style.backgroundColor="tan";
-  }
-       
-    else if(t<23 && t>20)
-     { Icon="fas fa-cloud-sun-rain";
-     temp.style.color='rgb(99, 161, 211)';
-     wIcon.style.color='rgba(233, 231, 116, 0.788)';
-document.body.style.backgroundColor="rgba(233, 231, 116, 0.788)";
-
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
     }
-     else 
-     { Icon="fas fa-cloud-showers-heavy";
-     temp.style.color='grey';
-     wIcon.style.color='grey';
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
-   return Icon;
-  }
+    .input{
+      margin-top: 2vh;
+    }
+    input{
+      display: none;
+      padding: 2vh 2vw;
+      color:crimson;
+      outline: none;
+      font-weight: bolder;
+      border-radius: 1px;
+      border: 0 solid white;
+    }
+    button{
+      background-color: black;
+      border: 0 solid ;
+      margin-left: 20px;
+      font-size: 5vh;
+      color: rgb(16, 111, 201);
+    }
+    button:hover{
+      transform: rotate(50deg)
+    }
+    .weather-background {
+      border: 3px outset crimson;
+      border-radius: 100px;
+      padding: 1% 1%;
+      margin-top: 9vh;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+    @media screen and (max-width:1000px){
+      .weather-background{
+        padding: 9% 2%;
+      }
+    }
+    @media screen and (min-width:1000px){
+      
+    }
   
-  wIcon.className=weatherIcon(temp.textContent);
-  date.textContent=getTime();
-</script>
+    .icon > h1 {
+      margin-left: 30vw;
+      font-size: 10vh;
+      color: gray;
+      text-shadow: 3px 3px 10px rgba(128, 128, 128, 0.678);
+    }
+    .icon > i {
+      font-size: 20vw;
+      color: rgb(89, 227, 245);
+      text-shadow: 3px 3px 10px rgba(128, 128, 128, 0.678);
+    }
+
+    .place {
+      padding: 3vh 3vh;
+      text-shadow: 3px 3px 10px rgba(236, 153, 153, 0.678);
+      color: brown;
+      font-size:5vw;
+      margin-left: 7vw;
+    }
+    .date {
+      text-shadow: 3px 3px 10px rgba(187, 231, 231, 0.678);
+      color: rgb(4, 161, 209);
+      font-size: 7vh;
+      margin-left: 7vw;
+      padding: 3vh 3vh;
+    }
+    .minTemp {
+      text-shadow: 3px 3px 10px rgba(238, 236, 140, 0.678);
+      color: rgb(231, 180, 13);
+      font-size: 5vh;
+      padding: 3vh 3vh;
+    }
+    .maxTemp {
+      text-shadow: 3px 3px 10px rgba(238, 236, 140, 0.678);
+      color: rgb(231, 180, 13);
+      font-size: 5vh;
+      padding: 5vh 3vh;
+    }
+
+  </style>
+  <body>
+    <form class="search-bar" method="GET">
+      <input type="text" name="city"
+      placeholder="Search City Here **"  class="search">
+      <button class="check"><i class="fas fa-search"></i></button>
+    </form>
+    <div class="weather-background">
+      <div class="icon">
+        <h1 id="temp">{%todaytemp%}</h1>
+        <i  id="temp-icon" class="fas fa-cloud-sun"></i>
+      </div>
+      <div class="place"><i class="fas fa-map-marker-alt"></i> {%location%}</div>
+      <div class="date" id="time"><i class="fas fa-calendar-alt icon"></i> date</div>
+      <div class="temp">
+        <span class="minTemp" id="min"><i class="fas fa-thermometer-empty"></i>{%min_temp%}</span>
+        <span class="maxTemp" id="max"><i class="fas fa-thermometer-three-quarters"></i> {%max_temp%}</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    const temp = document.getElementById("temp");
+    const mintemp = document.getElementById("min");
+    const maxtemp = document.getElementById("max");
+    const date = document.getElementById("time");
+    const btn = document.querySelector(".check")
+    const city = document.querySelector(".search")
+    btn.addEventListener("mouseover",()=>{
+     city.style.display="inline"
+    })
+    btn.addEventListener("click",()=>{
+      city.style.display="none"
+    })
+    const wIcon = document.getElementById("temp-icon");
+    temp.textContent = (temp.textContent - 273.15).toFixed(1);
+    mintemp.textContent = (mintemp.textContent - 273.15).toFixed(1);
+    maxtemp.textContent = (maxtemp.textContent - 273.15).toFixed(1);
+    var Icon;
+    const month = [
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const day = [
+      "Monday",
+      "Tueday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    // get time
+    const getTime = () => {
+      const dt = new Date();
+      const d = day[dt.getDay()];
+      const mon = month[dt.getMonth()];
+      const date = dt.getDate();
+      const year = dt.getFullYear();
+      todayDate = `${date} ${mon} ${year}`;
+      return todayDate;
+    };
+
+    // weather icon
+    const weatherIcon = (t) => {
+      if (t >= 23) {
+        Icon = "fas fa-cloud-sun";
+        temp.style.color = "rgba(243, 243, 72, 0.9)";
+        wIcon.style.color = "rgba(243, 243, 72, 0.9)";
+        // document.body.style.backgroundColor = "tan";
+      } else if (t < 23 && t > 20) {
+        Icon = "fas fa-cloud-sun-rain";
+        temp.style.color = "rgb(99, 161, 211)";
+        wIcon.style.color = "rgba(233, 231, 116, 0.788)";
+        // document.body.style.backgroundColor = "rgba(233, 231, 116, 0.788)";
+      } else {
+        Icon = "fas fa-cloud-showers-heavy";
+        temp.style.color = "grey";
+        wIcon.style.color = "grey";
+      }
+      return Icon;
+    };
+  
+    
+    wIcon.className = weatherIcon(temp.textContent);
+    date.textContent = getTime();
+  </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
