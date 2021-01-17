@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const { json } = require("express");
-const port=process.env.PORT||3000
+const port = process.env.PORT || 3000;
 
 function replacevalue(tempVal, orgVal) {
   let t = tempVal.replace("{%todaytemp%}", orgVal.main.temp);
@@ -33,12 +33,11 @@ app.get("/", (req, res) => {
     .on("data", (chunk) => {
       const data = JSON.parse(chunk);
       const object = [data];
-    if(object[0].cod==='404')
-    { 
-      res.send(`<h1 style='color:red;text-align:center;'>ERROR!</h1>
-      <a style='text-decoration:none;color:blue;text-align:center;' href='/'>Click Here</a>`)
-      return;
-    }
+      if (object[0].cod === "404") {
+        res.send(`<div style="color: gray;text-align: center;"> <h1>ERROR!!</h1>
+      <a href="/" style="text-decoration: none;">Click Here</a></div>`);
+        return;
+      }
       const temp = object.map((val) => replacevalue(homeFile, val)).join("");
       res.write(temp);
     })
@@ -48,8 +47,6 @@ app.get("/", (req, res) => {
     });
 });
 
-
-
-app.listen(port,()=>{
-  console.log("listening to "+port);
+app.listen(port, () => {
+  console.log("listening to " + port);
 });
